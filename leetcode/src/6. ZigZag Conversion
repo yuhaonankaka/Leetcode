@@ -1,0 +1,28 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        if (numRows==1){
+            return s;
+        }
+        String result = "";
+        int len = s.length();
+        for(int i = 0;i<numRows;i++){
+            int row = 0;
+            int index = 0;
+            boolean order = true; 
+            while(index<len){
+                if(row==i){
+                    result += s.charAt(index);
+                }
+                index++;
+                if(order)
+                    row++;
+                else
+                    row--;
+                if(row==0 || row==(numRows-1)){
+                    order=!order;
+                }
+            }
+        }
+        return result;
+    }
+}
