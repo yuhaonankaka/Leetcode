@@ -1,0 +1,46 @@
+class Solution {
+    public int myAtoi(String str) {
+        String fin = "";
+        String operator="";
+        int index=0;
+        for(int i = 0; i<str.length(); i++){
+            if(str.charAt(i)!=' '){
+                if(str.charAt(i)!='+' && str.charAt(i)!='-' && !Character.isDigit(str.charAt(i))){
+                    return 0;
+                }
+                else{
+                    if(str.charAt(i)!='+' && str.charAt(i)!='-'){
+                        fin+=str.charAt(i);
+                    } 
+                    else{
+                        operator+=str.charAt(i);
+                    }
+                    index=i;
+                    break;
+                }
+            }    
+        }
+        for(int i = index+1;i<str.length(); i++){
+            if(Character.isDigit(str.charAt(i))){
+                fin+=str.charAt(i);
+            }
+            else{
+                break;
+            }
+        }
+        if(fin=="" || fin== "-" || fin == "+"){
+            return 0;
+        }
+        fin=operator+fin;
+        double preresult = Double.parseDouble(fin); 
+        if(preresult>= (-Math.pow(2,31)) && preresult< Math.pow(2,31)){
+            return Integer.parseInt(fin);
+        }
+        else if(preresult>= Math.pow(2,31)){
+            return Integer.MAX_VALUE;
+        }
+        else{
+            return Integer.MIN_VALUE;
+        }
+    }
+}
