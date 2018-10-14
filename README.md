@@ -1,2 +1,4 @@
 # Leetcode
-Some solutions for leetcode Problems
+Solutions for leetcode Problems
+
+try to solve 1-2 problems everyday.
