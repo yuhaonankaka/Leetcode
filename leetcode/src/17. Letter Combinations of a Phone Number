@@ -1,0 +1,27 @@
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    const mapp = [[],[],["a","b","c"],["d","e","f"],["g","h","i"],["j","k","l"],["m","n","o"],["p","q","r","s"],["t","u","v"],["w","x","y","z"]];
+    if(digits.length === 0)
+        return [];
+    var zwischen = mapp[parseInt(digits.charAt(i))];
+    for(var i=0;i<digits.length-1;i++){
+        zwischen = diedai(zwischen,mapp[parseInt(digits.charAt(i+1))]);
+    }
+    return zwischen;
+    
+};
+
+function diedai(first,second) {
+    if(second === undefined)
+        return first;
+        const result = [];
+        for(let i = 0;i<first.length;i++){
+            for (let j = 0;j<second.length;j++){
+                result.push(first[i]+second[j]);
+            }
+        }
+        return result;
+    };
