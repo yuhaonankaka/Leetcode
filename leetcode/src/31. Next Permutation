@@ -1,0 +1,30 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if(nums.length==1){
+            return;
+        }
+        int current = nums.length-2; 
+        while(current!=-1){
+            for(int i = nums.length-1;i>=current;i--){
+                if(nums[i]>nums[current]){
+                    swap(nums,i,current);
+                    exchange(nums,current);
+                    return;
+                }
+            }
+            current--;
+        }  
+        Arrays.sort(nums);
+        return;
+    }
+    public static final <T> void swap (int[] a, int i, int j) {
+  int t = a[i];
+  a[i] = a[j];
+  a[j] = t;
+}
+    public void exchange(int[] nums, int i){
+        for(int j = 0;j<(nums.length-i-1)/2;j++){
+            swap(nums,i+1+j,nums.length-j-1);
+        }
+    }
+}
