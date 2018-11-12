@@ -1,0 +1,16 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix[0].length;
+        for(int i = 0;i<n/2;i++){
+            for(int k = i;k<matrix[0].length-i-1;k++){
+                int temp1 = matrix[k][n-1-i];
+                matrix[k][n-1-i] = matrix[i][k];
+                int temp2 = matrix[n-1-i][n-1-k];
+                matrix[n-1-i][n-1-k] = temp1;
+                temp1 = matrix[n-1-k][i];
+                matrix[n-1-k][i] = temp2;
+                matrix[i][k] = temp1;
+            }
+        }
+    }
+}
