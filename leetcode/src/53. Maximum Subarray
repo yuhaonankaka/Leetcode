@@ -1,0 +1,10 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+    int realMax=nums[0], maxInBetween=nums[0];
+    for (int i=1;i<nums.length;++i){
+    	maxInBetween= Math.max(maxInBetween+nums[i],nums[i]);
+    	realMax=Math.max(realMax, maxInBetween);	
+    }
+    return realMax;
+    }
+}
