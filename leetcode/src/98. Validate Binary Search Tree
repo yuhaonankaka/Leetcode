@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null){
+            return true;
+        }
+        return this.checkValidity(root.left, Long.MIN_VALUE, root.val) && this.checkValidity(root.right, root.val, Long.MAX_VALUE);
+    }
+    
+    public boolean checkValidity(TreeNode node, long leftRange, long rightRange){
+        if (node == null){
+            return true;
+        }
+        else if ((leftRange < node.val ) && ( node.val < rightRange) &&     (checkValidity(node.left, leftRange, node.val)) && (checkValidity(node.right, node.val, rightRange))){
+            return true;
+        } else{
+            return false;
+        }
+    }
+}
