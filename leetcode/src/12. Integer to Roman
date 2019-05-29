@@ -1,0 +1,43 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        thousand = num//1000
+        num = num - 1000*thousand
+        handred = num // 100
+        num = num - 100*handred
+        ten = num // 10
+        num = num - 10*ten
+        one = num
+        thousand_str = thousand * "M"
+        
+        handred_str = ""
+        if handred == 4:
+            handred_str = "CD"
+        elif handred == 9:
+            handred_str = "CM"
+        elif handred >= 5:
+            handred_str = "D" + ("C" * (handred-5))
+        elif handred!=0:
+            handred_str = "C" * handred
+        
+        ten_str = ""
+        if ten == 4:
+            ten_str = "XL"
+        elif ten == 9:
+            ten_str = "XC"
+        elif ten >= 5:
+            ten_str = "L" + ("X" * (ten-5))
+        elif ten!=0 :
+            ten_str = "X" * ten
+            
+        one_str = ""
+        if one == 4:
+            one_str = "IV"
+        elif one == 9:
+            one_str = "IX"
+        elif one >= 5:
+            one_str = "V" + ("I" * (one-5))
+        elif one!=0:
+            one_str = "I" * one
+            
+        result = thousand_str + handred_str + ten_str + one_str
+        return result
