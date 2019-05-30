@@ -1,0 +1,38 @@
+class Solution:
+    def threeSumClosest(self, num, target):
+        num.sort()
+        result = num[0] + num[1] + num[2]
+        for i in range(len(num) - 2):
+            j, k = i+1, len(num) - 1
+            while j < k:
+                sum = num[i] + num[j] + num[k]
+                if sum == target:
+                    return sum
+                
+                if abs(sum - target) < abs(result - target):
+                    result = sum
+                
+                if sum < target:
+                    j += 1
+                elif sum > target:
+                    k -= 1
+            
+        return result
+        
+    # def threeSumClosest(self, nums: List[int], target: int) -> int:
+    #     result = nums[0] + nums[1] + nums[2]
+    #     diff = abs(nums[0] + nums[1] + nums[2] - target)
+    #     length = len(nums)
+    #     for i1 in range(0,length-2):
+    #         for i2 in range(i1+1,length-1):
+    #             for i3 in range(i2+1,length):
+    #                 temp = abs(nums[i1] + nums[i2] + nums[i3] - target)
+    #                 if temp < diff:
+    #                     result = nums[i1] + nums[i2] + nums[i3]
+    #                     diff = temp
+    #                 elif temp == 0:
+    #                     result = nums[i1] + nums[i2] + nums[i3]
+    #                     return result
+    #     return result
+    
+    被comment掉的是我自己写的答案，非常弱智的暴力算法，应该想到在这种题目中，sort是很有用的，不需要把所有的都试一遍，需要加就加，需要减就减。左边的pointer增加就是加，右边的pointer减少，sum也会减少。，两边一起逼近target比暴力算法快。
