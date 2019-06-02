@@ -1,0 +1,13 @@
+class Solution:
+    def swapPairs(self, head):
+        pre, pre.next = self, head
+        while pre.next and pre.next.next:
+            a = pre.next
+            b = a.next
+            pre.next, b.next, a.next = b, a, b.next
+            pre = a
+        return self.next
+        
+        之前用的是recursive，但发现有一个答案特别牛逼，4个elements为一组，然后把这个组的中间两个交换，然后跨两步，把第三个元素作为第一个元素，重新改变
+        中间两个元素的位置，这样一直到最后。
+        边界条件：其实一共有3个元素在里面就可以，少于3个元素就不需要变位置了。
