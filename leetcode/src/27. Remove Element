@@ -1,0 +1,8 @@
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        while (val in nums):
+            nums.remove(val)
+        return len(nums)
+        
+        # 看了下答案，似乎two pointer是标准答案，一个作为真正的loop pointer，一个作为新的array的pointer并且担任计数器
+        
