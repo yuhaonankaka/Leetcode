@@ -1,0 +1,17 @@
+class Solution:
+    def divide(self, dividend, divisor):
+        positive = (dividend < 0) is (divisor < 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        res = 0
+        while dividend >= divisor:
+            temp, i = divisor, 1
+            while dividend >= temp:
+                dividend -= temp
+                res += i
+                i <<= 1
+                temp <<= 1
+        if not positive:
+            res = -res
+        return min(max(-2147483648, res), 2147483647)
+        
+        自己做的和答案差了咦个while loop的加速过程，如果能用 i <<= 1这种过程，每次可以把倍数增加2，然后如果超过了，再返回到1，重新开始，太特么机智了
