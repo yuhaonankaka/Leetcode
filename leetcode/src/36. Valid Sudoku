@@ -1,0 +1,25 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        for r in range(9):
+            for c in range(9):
+                if board[r][c] != ".":
+                    # check row
+                    for temp in range(c+1,9):
+                        if board[r][temp] == board[r][c]:
+                            return False
+                    # check column
+                    for temp in range(r+1,9):
+                        if board[temp][c] == board[r][c]:
+                            return False
+                    
+        for r in range(3):
+            for c in range(3):
+                tempList = []
+                for row in range(3*r,3*r+3):
+                    for column in range(3*c, 3*c+3):
+                        if board[row][column] != "." and board[row][column] in tempList:
+                            return False
+                        else:
+                            tempList.append(board[row][column])
+        return True
+                  
