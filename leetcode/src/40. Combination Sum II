@@ -1,0 +1,28 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        newcandidates = []
+        for c in candidates:
+            if c <= target:
+                newcandidates.append(c)
+            else:
+                break
+        finalresult = []
+        self.findit(newcandidates,target,[],finalresult)
+        finalresult
+        return finalresult
+        
+    def findit(self, candidates, target, currentresult, finalresult):
+        for index,c in enumerate(candidates):
+            remain = target - c
+            newresult = currentresult+[c]
+            if remain == 0:
+                newresult.sort()
+                if newresult not in finalresult:
+                    finalresult.append(newresult)
+            elif remain <0:
+                continue
+            else:
+                self.findit(candidates[:index]+candidates[index+1:],remain,newresult,finalresult)
+                
+                比较慢，可能是因为有重复
