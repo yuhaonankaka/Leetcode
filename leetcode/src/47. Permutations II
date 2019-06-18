@@ -1,0 +1,40 @@
+public class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums==null || nums.length==0) return res;
+        boolean[] used = new boolean[nums.length];
+        List<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(nums);
+        dfs(nums, used, list, res);
+        return res;
+    }
+
+    public void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res){
+        if(list.size()==nums.length){
+            res.add(new ArrayList<Integer>(list));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(used[i]) continue;
+            if(i>0 &&nums[i-1]==nums[i] && !used[i-1]) continue;
+            used[i]=true;
+            list.add(nums[i]);
+            dfs(nums,used,list,res);
+            used[i]=false;
+            list.remove(list.size()-1);
+        }
+    }
+}
+
+说实话我觉得这道题挺难的，比很多题都难。
+我没做出来，这个的解题思路看下来大概是一次只增加一个数字，然后对于每一种情况都再考虑一遍所有不重复的情况。
+nums[i-1]==nums[i] && !used[i-1]
+这句是最蛋疼的
+大概意思就是说，比如现在到一种情况是[2]，
+然后原数列是[1,1,2]
+你跑的时候不会跑2，因为已经用过了。
+但现在要loop [1,1]
+第一次loop的时候，肯定可以加上1，也就是[2,1]
+但下一次loop的时候，这种情况在上一次肯定考虑过了，所以才会unused，这里tricky的地方在于，虽然在这一轮unused，其实在前面已经用过了，所以这次我们就不再考虑
+这种情况，因为肯定是一样的。
+而如果上一个是已经used，那么这一轮肯定是要增加一个的，就算相等，也是需要增加一个的，所以就不用考虑了
