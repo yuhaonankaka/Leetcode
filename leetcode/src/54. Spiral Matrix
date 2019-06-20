@@ -1,0 +1,56 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if matrix == []:
+            return []
+        result = []
+        r  = len(matrix)
+        c = len(matrix[0])
+        cp = [0,0]
+        rused = []
+        cused = []
+        rd = 0
+        cd = 0
+        self.spiralRun(matrix, result, r , c, cp, rused, cused, rd,cd)
+        return result
+    def spiralRun(self, matrix: List[List[int]], result, mr,mc,cp,rused,cused,rd,cd):
+        result.append(matrix[cp[0]][cp[1]])
+        if len(result) == mr*mc:
+            return
+        if rd == 0 and cd ==0: # right
+            if cp[1]+1 in cused or cp[1]+1 == mc:
+                cd =1
+                rused.append(cp[0])
+                cp[0]+=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+            else:
+                cp[1]+=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+        elif rd == 0 and cd == 1: # down
+            if cp[0]+1 in rused or cp[0]+1 == mr:
+                cd =0
+                rd =1
+                cused.append(cp[1])
+                cp[1]-=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+            else:
+                cp[0]+=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+        elif rd == 1 and cd ==0: # left
+            if cp[1]-1 in cused or cp[1]-1 == -1:
+                cd =1
+                rused.append(cp[0])
+                cp[0]-=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+            else:
+                cp[1]-=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+        elif rd ==1 and cd ==1: #up
+            if cp[0]-1 in rused or cp[0]-1 == -1:
+                cd =0
+                rd =0
+                cused.append(cp[1])
+                cp[1]+=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
+            else:
+                cp[0]-=1
+                self.spiralRun(matrix,result,mr,mc,cp,rused,cused,rd,cd)
