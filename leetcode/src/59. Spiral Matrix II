@@ -1,0 +1,88 @@
+我的解法：冗长又低智
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        if n == 0:
+            return [[]]
+        initial = []
+        for i in range(n):
+            initial.append([])
+            for j in range(n):
+                initial[i].append(None)
+        self.generate(n,1,initial,"right",[0,0],[],[])
+        return initial
+    def generate(self,n,i, currentMatrix, direction, position,usedr,usedc):
+        if(i > n**2):
+            return
+        r = position[0]
+        c = position[1]
+        if direction == "right":
+            if c+1 in usedc or c+1 == n:
+                direction = "down"
+                usedr.append(r)
+                currentMatrix[position[0]][position[1]] = i
+                position = [r+1,c]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+            else:
+                currentMatrix[position[0]][position[1]] = i
+                position = [r,c+1]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+        elif direction == "down":
+            if r+1 in usedr or r+1 == n:
+                direction = "left"
+                usedc.append(c)
+                currentMatrix[position[0]][position[1]] = i
+                position = [r,c-1]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+            else:
+                
+                currentMatrix[position[0]][position[1]] = i
+                position = [r+1,c]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+        elif direction == "left":
+            if c-1 in usedc or c-1 == -1:
+                direction = "up"
+                usedr.append(r)
+                
+                currentMatrix[position[0]][position[1]] = i
+                position = [r-1,c]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+            else:
+                
+                currentMatrix[position[0]][position[1]] = i
+                position = [r,c-1]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+        elif direction == "up":
+            if r-1 in usedr or r-1 == -1:
+                direction = "right"
+                usedc.append(c)
+                
+                currentMatrix[position[0]][position[1]] = i
+                position = [r,c+1]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+            else:
+                
+                currentMatrix[position[0]][position[1]] = i
+                position = [r-1,c]
+                i += 1
+                self.generate(n,i, currentMatrix, direction, position,usedr,usedc)
+
+
+网友解法：
+spiral的步数关键，在于i，j和i j变化的方向，其他都不重要。。。
+def generateMatrix(self, n):
+    A = [[0] * n for _ in range(n)]
+    i, j, di, dj = 0, 0, 0, 1
+    for k in xrange(n*n):
+        A[i][j] = k + 1
+        if A[(i+di)%n][(j+dj)%n]:
+            di, dj = dj, -di
+        i += di
+        j += dj
+    return A
